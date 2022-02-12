@@ -4,6 +4,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using YoutubePlay.Business.Interfaces;
+using YoutubePlay.Common;
 
 namespace YoutubePlay.UI.Controllers
 {
@@ -26,6 +28,8 @@ namespace YoutubePlay.UI.Controllers
         [HttpGet]
         public IEnumerable<WeatherForecast> Get()
         {
+            AppServiceProvider.Instance.Get<IYoutubeService>().SearchVideoAsync(new Models.Youtube.SearchVideoRequest() { Query = "sansar" }).Wait();
+
             var rng = new Random();
             return Enumerable.Range(1, 5).Select(index => new WeatherForecast
             {

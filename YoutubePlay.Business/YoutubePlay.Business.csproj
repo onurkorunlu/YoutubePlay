@@ -4,4 +4,10 @@
     <TargetFramework>netcoreapp3.1</TargetFramework>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\YoutubePlay.Common\YoutubePlay.Common.csproj" />
+    <ProjectReference Include="..\YoutubePlay.Model\YoutubePlay.Models.csproj" />
+    <ProjectReference Include="..\YoutubePlay.YoutubeHelper\YoutubePlay.YoutubeHelper.csproj" />
+  </ItemGroup>
+
 </Project>

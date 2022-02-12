@@ -5,7 +5,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Utils\" />
+    <ProjectReference Include="..\YoutubePlay.Model\YoutubePlay.Models.csproj" />
   </ItemGroup>
 
 </Project>

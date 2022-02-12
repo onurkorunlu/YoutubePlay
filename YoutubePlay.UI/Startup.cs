@@ -5,6 +5,10 @@ using Microsoft.AspNetCore.SpaServices.AngularCli;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.Extensions.Logging;
+using YoutubePlay.Business.Interfaces;
+using YoutubePlay.Business.Services;
+using YoutubePlay.Common;
 
 namespace YoutubePlay.UI
 {
@@ -41,6 +45,10 @@ namespace YoutubePlay.UI
                 // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
                 app.UseHsts();
             }
+
+            AppServiceProvider.Instance.Register(typeof(IYoutubeService), new YoutubeService());
+            AppServiceProvider.Instance.Register(typeof(IReturnMessages), new ReturnMessages());
+            AppServiceProvider.Instance.Register(typeof(ILogger), new LoggerFactory().CreateLogger("YoutubePlay"));
 
             app.UseHttpsRedirection();
             app.UseStaticFiles();

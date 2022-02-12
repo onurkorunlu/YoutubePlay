@@ -15,6 +15,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "YoutubePlay.Business", "You
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "YoutubePlay.DataAccess", "YoutubePlay.DataAccess\YoutubePlay.DataAccess.csproj", "{ABE00ADC-90E0-4A29-8E2F-C68537AEDF04}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "YoutubePlay.YoutubeHelper", "YoutubePlay.YoutubeHelper\YoutubePlay.YoutubeHelper.csproj", "{3133F462-5C30-498B-9834-F1BA75BF1900}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "YoutubePlay.YoutubeHelperTests", "YoutubePlay.YoutubeHelperTests\YoutubePlay.YoutubeHelperTests.csproj", "{726614F3-6195-49C0-8CD9-F3E6CF33EBA9}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -45,6 +49,14 @@ Global
 		{ABE00ADC-90E0-4A29-8E2F-C68537AEDF04}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{ABE00ADC-90E0-4A29-8E2F-C68537AEDF04}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{ABE00ADC-90E0-4A29-8E2F-C68537AEDF04}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3133F462-5C30-498B-9834-F1BA75BF1900}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3133F462-5C30-498B-9834-F1BA75BF1900}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3133F462-5C30-498B-9834-F1BA75BF1900}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3133F462-5C30-498B-9834-F1BA75BF1900}.Release|Any CPU.Build.0 = Release|Any CPU
+		{726614F3-6195-49C0-8CD9-F3E6CF33EBA9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{726614F3-6195-49C0-8CD9-F3E6CF33EBA9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{726614F3-6195-49C0-8CD9-F3E6CF33EBA9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{726614F3-6195-49C0-8CD9-F3E6CF33EBA9}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
