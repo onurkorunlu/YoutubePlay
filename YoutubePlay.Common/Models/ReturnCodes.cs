@@ -11,5 +11,6 @@ namespace YoutubePlay.Common.Models
 
         // Youtube HTTP ERRORS 1XX
         public static string YT_HTTP_SEARCH_ERROR = "100";
+        public static string YT_GET_AUDIO_ERROR = "101";
     }
 }

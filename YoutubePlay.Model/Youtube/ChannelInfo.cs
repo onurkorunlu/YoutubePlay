@@ -2,8 +2,7 @@
 {
     public class ChannelInfo
     {
-        public string Url { get; set; }
-        public string Image { get; set; }
+        public Thumbnails Thumbnails { get; set; }
         public string Name { get; set; }
     }
 }
