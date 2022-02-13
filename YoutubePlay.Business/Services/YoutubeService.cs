@@ -15,7 +15,7 @@ namespace YoutubePlay.Business.Services
         {
             try
             {
-                List<YoutubeVideo> response = await YoutubeSearch.SearchAsync(request);
+                List<YoutubeVideo> response = await YoutubeSearch.SearchVideoAsync(request);
                 return base.SuccessResult<List<YoutubeVideo>>(response);
             }
             catch (YoutubePlayException e)
