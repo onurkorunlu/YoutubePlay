@@ -4,8 +4,7 @@ using System.Text;
 
 namespace YoutubePlay.Models.Youtube
 {
-    public class SearchChannelRequest
+    public class YoutubeChannel
     {
-        public string Query { get; set; }
     }
 }
