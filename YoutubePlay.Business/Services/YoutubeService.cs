@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
 using System.Threading.Tasks;
 using YoutubePlay.Business.Interfaces;
 using YoutubePlay.Models.Base;
@@ -27,5 +26,23 @@ namespace YoutubePlay.Business.Services
                 return base.ErrorResult<List<YoutubeVideo>>(e, request);
             }
         }
+
+        public async Task<BaseServiceResult<List<YoutubePlaylist>>> SearchPlaylistAsync(SearchPlaylistRequest request)
+        {
+            try
+            {
+                List<YoutubePlaylist> response = await YoutubeSearch.SearchPlaylistAsync(request);
+                return base.SuccessResult<List<YoutubePlaylist>>(response);
+            }
+            catch (YoutubePlayException e)
+            {
+                return base.ErrorResult<List<YoutubePlaylist>>(e, request);
+            }
+            catch (Exception e)
+            {
+                return base.ErrorResult<List<YoutubePlaylist>>(e, request);
+            }
+        }
+
     }
 }

@@ -32,5 +32,17 @@ namespace YoutubePlay.Test.Services
             var response = await AppServiceProvider.Instance.Get<IYoutubeService>().SearchVideoAsync(request);
             Assert.IsTrue(response.IsSucess);
         }
+
+        [Test]
+        public async Task SearchPlaylistAsync()
+        {
+            SearchPlaylistRequest request = new SearchPlaylistRequest
+            {
+                Query = "Tarkan"
+            };
+
+            var response = await AppServiceProvider.Instance.Get<IYoutubeService>().SearchPlaylistAsync(request);
+            Assert.IsTrue(response.IsSucess);
+        }
     }
 }
