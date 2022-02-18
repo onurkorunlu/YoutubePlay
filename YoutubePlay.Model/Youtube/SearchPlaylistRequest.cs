@@ -6,5 +6,6 @@ namespace YoutubePlay.Models.Youtube
 {
     public class SearchPlaylistRequest
     {
+        public string Query { get; set; }
     }
 }

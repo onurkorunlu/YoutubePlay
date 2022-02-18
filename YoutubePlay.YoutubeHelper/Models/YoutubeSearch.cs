@@ -11,6 +11,8 @@ using YoutubePlay.Common.Models;
 using YoutubePlay.Models.Base;
 using YoutubePlay.Models.Youtube;
 using YoutubePlay.YoutubeHelper.Models;
+using YoutubePlay.YoutubeHelper.Models.Playlist;
+using YoutubePlay.YoutubeHelper.Models.Video;
 
 namespace YoutubePlay.YoutubeHelper
 {
@@ -29,9 +31,9 @@ namespace YoutubePlay.YoutubeHelper
                     var data = new StringContent(jsonRequest, Encoding.UTF8, "application/json");
                     var postResponse = await client.PostAsync("https://www.youtube.com/youtubei/v1/search?key=AIzaSyAO_FJ2SlqU8Q4STEHLGCilw_Y9_11qcW8", data);
                     var responseString = postResponse.Content.ReadAsStringAsync().Result;
-                    YoutubeSearchResponse youtubeSearchResponse = JsonConvert.DeserializeObject<YoutubeSearchResponse>(responseString);
+                    YoutubeSearchVideoResponse.Root youtubeSearchResponse = JsonConvert.DeserializeObject<YoutubeSearchVideoResponse.Root>(responseString);
                     List<YoutubeVideo> result = new List<YoutubeVideo>();
-                    var contents = youtubeSearchResponse?.contents?.TwoColumnSearchResultsRenderer?.primaryContents?.sectionListRenderer?.contents;
+                    var contents = youtubeSearchResponse?.contents?.twoColumnSearchResultsRenderer?.primaryContents?.sectionListRenderer?.contents;
                     if (contents != null && contents.Any())
                     {
                         foreach (var sectionListRenderer in contents)
@@ -86,13 +88,57 @@ namespace YoutubePlay.YoutubeHelper
             }
         }
 
-        public static async Task<List<YoutubeVideo>> SearchPlaylistAsync(SearchPlaylistRequest request)
+        public static async Task<List<YoutubePlaylist>> SearchPlaylistAsync(SearchPlaylistRequest request)
         {
             try
             {
                 using (var client = new HttpClient())
                 {
-                    return new List<YoutubeVideo>();
+                    var jsonRequest = @"{'context':{'client':{'clientName':'WEB','clientVersion':'2.20210224.06.00','newVisitorCookie':true},'user':{'lockedSafetyMode':false}},'query':'@query','client':{'hl':'tr','gl':'TR'}, 'params':'EgIQAw%3D%3D'}";
+
+                    jsonRequest = jsonRequest.Replace("@query", request.Query);
+
+                    var data = new StringContent(jsonRequest, Encoding.UTF8, "application/json");
+                    var postResponse = await client.PostAsync("https://www.youtube.com/youtubei/v1/search?key=AIzaSyAO_FJ2SlqU8Q4STEHLGCilw_Y9_11qcW8", data);
+                    var responseString = postResponse.Content.ReadAsStringAsync().Result;
+                    YoutubeSearchPlaylistResponse.Root youtubeSearchResponse = JsonConvert.DeserializeObject<YoutubeSearchPlaylistResponse.Root>(responseString);
+                    List<YoutubePlaylist> result = new List<YoutubePlaylist>();
+                    var contents = youtubeSearchResponse?.contents?.twoColumnSearchResultsRenderer?.primaryContents?.sectionListRenderer?.contents;
+                    if (contents != null && contents.Any())
+                    {
+                        foreach (var sectionListRenderer in contents)
+                        {
+                            var itemContents = sectionListRenderer?.itemSectionRenderer?.contents;
+                            if (itemContents != null && itemContents.Any())
+                            {
+                                foreach (var item in itemContents)
+                                {
+                                    if (item.playlistRenderer != null)
+                                    {
+                                        var videoRenderer = item.playlistRenderer;
+
+                                        YoutubePlaylist playlistItem = new YoutubePlaylist
+                                        {
+                                            Id = videoRenderer.playlistId,
+                                            Title = videoRenderer.title?.simpleText,
+                                            VideoCount = short.Parse(videoRenderer.videoCount),
+                                            Owner = videoRenderer.shortBylineText?.runs?.First().text,
+                                            Thumbnails = new Thumbnails
+                                            {
+                                                Url = videoRenderer?.thumbnails?.First()?.thumbnails?.First().url,
+                                                Height = videoRenderer?.thumbnails?.First()?.thumbnails?.First().height,
+                                                Width = videoRenderer?.thumbnails?.First()?.thumbnails?.First().width
+                                            }
+                                        };
+
+                                        result.Add(playlistItem);
+                                    }
+                                }
+                            }
+                        }
+                    }
+
+                    return result;
                 }
             }
             catch (Exception e)
@@ -102,20 +148,5 @@ namespace YoutubePlay.YoutubeHelper
             }
         }
 
-        public static async Task<List<YoutubeVideo>> SearchChannelAsync(SearchChannelRequest request)
-        {
-            try
-            {
-                using (var client = new HttpClient())
-                {
-                    return new List<YoutubeVideo>();
-                }
-            }
-            catch (Exception e)
-            {
-                AppServiceProvider.Instance.Get<ILogger>().LogError(e, "ERROR @SearchChannelAsync");
-                throw new YoutubePlayException(ReturnCodes.YT_HTTP_SEARCH_ERROR, request);
-            }
-        }
     }
 }
