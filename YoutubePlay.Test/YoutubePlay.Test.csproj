@@ -18,5 +18,5 @@
     <ProjectReference Include="..\YoutubePlay.Business\YoutubePlay.Business.csproj" />
     <ProjectReference Include="..\YoutubePlay.Common\YoutubePlay.Common.csproj" />
   </ItemGroup>
-
+ 
 </Project>
