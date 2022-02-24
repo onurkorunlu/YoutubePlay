@@ -1,14 +1,58 @@
-<h1>Hello, world!</h1>
-<p>Welcome to your new single-page application, built with:</p>
-<ul>
-  <li><a href='https://get.asp.net/'>ASP.NET Core</a> and <a href='https://msdn.microsoft.com/en-us/library/67ef8sbd.aspx'>C#</a> for cross-platform server-side code</li>
-  <li><a href='https://angular.io/'>Angular</a> and <a href='http://www.typescriptlang.org/'>TypeScript</a> for client-side code</li>
-  <li><a href='http://getbootstrap.com/'>Bootstrap</a> for layout and styling</li>
-</ul>
-<p>To help you get started, we've also set up:</p>
-<ul>
-  <li><strong>Client-side navigation</strong>. For example, click <em>Counter</em> then <em>Back</em> to return here.</li>
-  <li><strong>Angular CLI integration</strong>. In development mode, there's no need to run <code>ng serve</code>. It runs in the background automatically, so your client-side resources are dynamically built on demand and the page refreshes when you modify any file.</li>
-  <li><strong>Efficient production builds</strong>. In production mode, development-time features are disabled, and your <code>dotnet publish</code> configuration automatically invokes <code>ng build</code> to produce minified, ahead-of-time compiled JavaScript files.</li>
-</ul>
-<p>The <code>ClientApp</code> subdirectory is a standard Angular CLI application. If you open a command prompt in that directory, you can run any <code>ng</code> command (e.g., <code>ng test</code>), or use <code>npm</code> to install extra packages into it.</p>
+
+<div>
+
+    <form ng-submit="searchVideos()" id="searchForm">
+        <div class="input-group mb-3">
+            <input type="text" ng-model="key" class="form-control input-lg bg-dark text-white" id="videoName" placeholder="Video Adý ..." autocomplete="off" />
+        </div>
+        <div>
+            <button type="button" class="btn btn-info btn-lg btn-block bg-dark text-white" ng-click="searchVideos()">Ara</button>
+        </div>
+    </form>
+
+
+    <div *ngIf="videoList.length>0">
+        <table class="table table-borderless text-white">
+            <tbody>
+                <tr ng-repeat="item in videoList">
+                    <td style="vertical-align:middle;width:10%"><img style="max-height:60px" src="{{item.img}}" /></td>
+                    <td class="text-wrap" style="vertical-align: middle; width: 80% ">{{item.titleShort}}</td>
+                    <td style="vertical-align: middle; width: 10%">
+                        <button class="play-btn" ng-click="play(item)"><i class="fa fa-play"></i></button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div class="text-center" style="margin-top:50px" *ngIf="isLoading">
+        <div class="spinner-grow text-primary" role="status">
+            <span class="sr-only">Loading...</span>
+        </div>
+        <div class="spinner-grow text-secondary" role="status">
+            <span class="sr-only">Loading...</span>
+        </div>
+        <div class="spinner-grow text-success" role="status">
+            <span class="sr-only">Loading...</span>
+        </div>
+        <div class="spinner-grow text-danger" role="status">
+            <span class="sr-only">Loading...</span>
+        </div>
+        <div class="spinner-grow text-warning" role="status">
+            <span class="sr-only">Loading...</span>
+        </div>
+        <div class="spinner-grow text-info" role="status">
+            <span class="sr-only">Loading...</span>
+        </div>
+        <div class="spinner-grow text-light" role="status">
+            <span class="sr-only">Loading...</span>
+        </div>
+        <div class="spinner-grow text-dark" role="status">
+            <span class="sr-only">Loading...</span>
+        </div>
+    </div>
+
+    <div class="footer bg-dark">
+        <audio id="player" src="#" controls style="width:100%;padding:5px;" autoplay></audio>
+    </div>
+</div>
