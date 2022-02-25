@@ -7,8 +7,11 @@ import { RouterModule } from '@angular/router';
 import { AppComponent } from './app.component';
 import { NavMenuComponent } from './nav-menu/nav-menu.component';
 import { HomeComponent } from './home/home.component';
-import { RecaptchaV3Module, RECAPTCHA_V3_SITE_KEY } from 'ng-recaptcha';
 import { environment } from '../environments/environment';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MatIconModule } from '@angular/material/icon';
+import { MatButtonModule } from '@angular/material/button';
+import { MatTableModule } from '@angular/material/table';
 
 @NgModule({
     declarations: [
@@ -20,16 +23,17 @@ import { environment } from '../environments/environment';
         BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
         HttpClientModule,
         FormsModule,
-        RecaptchaV3Module,
         RouterModule.forRoot([
             { path: '', component: HomeComponent, pathMatch: 'full' },
-        ])
+        ]),
+        BrowserAnimationsModule,
+
+        // Material
+        MatIconModule,
+        MatButtonModule,
+        MatTableModule
     ],
     providers: [
-        {
-            provide: RECAPTCHA_V3_SITE_KEY,
-            useValue: environment.recaptcha.siteKey,
-        }
     ],
     bootstrap: [AppComponent]
 })

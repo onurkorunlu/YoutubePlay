@@ -2,6 +2,8 @@ import { Component } from '@angular/core';
 import { DomSanitizer } from '@angular/platform-browser';
 import * as Plyr from 'plyr';
 import { Options } from 'plyr';
+import { SearchVideoRequest } from '../models/search-video-request';
+import { YoutubeVideo } from '../models/youtube-video';
 import { YoutubeService } from '../services/youtube.service';
 
 @Component({
@@ -10,36 +12,33 @@ import { YoutubeService } from '../services/youtube.service';
 })
 export class HomeComponent {
 
-    public videoList = [];
-    public key = '';
-    public selectedItem = null;
-    public isLoading = false;
-    public playlist = [];
     private player: Plyr;
 
-    constructor(private youtubeService: YoutubeService, private sanitizer: DomSanitizer) {
+    public videoList: YoutubeVideo[] = [];
+    public playlist: YoutubeVideo[] = [];
+    public selectedItem: YoutubeVideo = null;
+    public isLoading = false;
+    public searchVideoRequest: SearchVideoRequest = <SearchVideoRequest>{ maxResult: 20 };
 
+    constructor(private youtubeService: YoutubeService, private sanitizer: DomSanitizer) {
         this.player = new Plyr('#player', {
             /* options */
         });
-
     };
 
     public searchVideos = function () {
-
-        this.recaptchaV3Service.execute('importantAction')
-            .subscribe((token: string) => {
-                console.debug(`Token [${token}] generated`);
-                this.isLoading = true;
-                this.youtubeService.searchVideos(this.key, 10, token, function (res) {
-                    if (res.isSuccess) {
-                        console.log(res.data.result);
-                        this.isLoading = false;
-                        this.videoList = res.data.result;
-                    }
-                }, function (err) {
+        console.log(this.searchVideoRequest);
+        this.isLoading = true;
+        this.youtubeService.searchVideos(this.searchVideoRequest).subscribe(
+            (res) => {
+                if (res.isSuccess) {
                     this.isLoading = false;
-                })
+                    this.videoList = res.data;
+                }
+            },
+            (errorMessage: string) => {
+                console.log(errorMessage);
+                this.isLoading = false;
             }
         );
     }
