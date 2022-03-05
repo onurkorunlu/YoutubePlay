@@ -6,7 +6,7 @@ namespace YoutubePlay.Models.Base
 {
     public class BaseServiceResult<T>
     {
-        public bool IsSucess { get; set; }
+        public bool IsSuccess { get; set; }
         public string ReturnCode { get; set; }
         public string ReturnMessage { get; set; }
         public T Data { get; set; }

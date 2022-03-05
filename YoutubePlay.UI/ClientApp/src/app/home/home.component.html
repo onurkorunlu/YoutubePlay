@@ -1,14 +1,45 @@
-<h1>Hello, world!</h1>
-<p>Welcome to your new single-page application, built with:</p>
-<ul>
-  <li><a href='https://get.asp.net/'>ASP.NET Core</a> and <a href='https://msdn.microsoft.com/en-us/library/67ef8sbd.aspx'>C#</a> for cross-platform server-side code</li>
-  <li><a href='https://angular.io/'>Angular</a> and <a href='http://www.typescriptlang.org/'>TypeScript</a> for client-side code</li>
-  <li><a href='http://getbootstrap.com/'>Bootstrap</a> for layout and styling</li>
-</ul>
-<p>To help you get started, we've also set up:</p>
-<ul>
-  <li><strong>Client-side navigation</strong>. For example, click <em>Counter</em> then <em>Back</em> to return here.</li>
-  <li><strong>Angular CLI integration</strong>. In development mode, there's no need to run <code>ng serve</code>. It runs in the background automatically, so your client-side resources are dynamically built on demand and the page refreshes when you modify any file.</li>
-  <li><strong>Efficient production builds</strong>. In production mode, development-time features are disabled, and your <code>dotnet publish</code> configuration automatically invokes <code>ng build</code> to produce minified, ahead-of-time compiled JavaScript files.</li>
-</ul>
-<p>The <code>ClientApp</code> subdirectory is a standard Angular CLI application. If you open a command prompt in that directory, you can run any <code>ng</code> command (e.g., <code>ng test</code>), or use <code>npm</code> to install extra packages into it.</p>
+
+<form #f="ngForm">
+
+    <div class="form-row">
+        <div class="form-group col-9">
+            <input type="text" [(ngModel)]="searchVideoRequest.query" [ngModelOptions]="{standalone: true}" class="form-control input-lg" id="videoName" placeholder="Video Name ..." autocomplete="off" />
+        </div>
+        <div class="form-group col-3">
+            <select class="form-control" [(ngModel)]="searchVideoRequest.maxResult" [ngModelOptions]="{standalone: true}">
+                <option value="5">5</option>
+                <option value="10">10</option>
+                <option value="20" selected>20</option>
+            </select>
+        </div>
+        <button type="button" class="btn btn-light btn-block" (click)="searchVideos()">Search</button>
+    </div>
+</form>
+
+<hr />
+
+<cdk-virtual-scroll-viewport style="height: 500px" itemSize="5">
+
+    <mat-card [ngClass]="'example-card video-card'" *cdkVirtualFor="let item of videoList" [ngStyle]="{'background-image': 'url(' + item.thumbnails.url + ')'}">
+        <mat-card-header>
+            <div mat-card-avatar [ngStyle]="{'background-size': 'cover', 'background-image': 'url(' + item.channel.thumbnails.url + ')'}"></div>
+            <mat-card-title class="video-card-title">{{item.channel.name}}</mat-card-title>
+            <mat-card-subtitle class="video-card-subtitle">{{item.title}}</mat-card-subtitle>
+        </mat-card-header>
+        <mat-card-actions align="end">
+            <button mat-fab color="primary" aria-label="Example icon button with a bookmark icon" (click)="play(item)">
+                <mat-icon>play_circle_filled</mat-icon>
+            </button>
+        </mat-card-actions>
+        <mat-card-footer *ngIf="selectedItem == item">
+            <mat-progress-bar mode="indeterminate"></mat-progress-bar>
+        </mat-card-footer>
+    </mat-card>
+
+</cdk-virtual-scroll-viewport>
+
+<hr />
+
+<div class="footer bg-dark">
+    <audio id="player" src="#" controls style="width:100%;padding:5px;" autoplay></audio>
+</div>

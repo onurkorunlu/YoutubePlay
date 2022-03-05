@@ -11,5 +11,7 @@ namespace YoutubePlay.Business.Interfaces
 
         public Task<BaseServiceResult<List<YoutubePlaylist>>> SearchPlaylistAsync(SearchPlaylistRequest request);
 
+        public Task<BaseServiceResult<YoutubeMp3>> GetMp3UrlAsync(string videoId);
+
     }
 }

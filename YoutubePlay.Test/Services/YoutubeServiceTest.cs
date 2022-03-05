@@ -30,7 +30,7 @@ namespace YoutubePlay.Test.Services
             };
 
             var response = await AppServiceProvider.Instance.Get<IYoutubeService>().SearchVideoAsync(request);
-            Assert.IsTrue(response.IsSucess);
+            Assert.IsTrue(response.IsSuccess);
         }
 
         [Test]
@@ -42,7 +42,7 @@ namespace YoutubePlay.Test.Services
             };
 
             var response = await AppServiceProvider.Instance.Get<IYoutubeService>().SearchPlaylistAsync(request);
-            Assert.IsTrue(response.IsSucess);
+            Assert.IsTrue(response.IsSuccess);
         }
     }
 }

@@ -10,7 +10,7 @@ namespace YoutubePlay.Models.Base
         {
             return new BaseServiceResult<T>
             {
-                IsSucess = true,
+                IsSuccess = true,
                 ReturnCode = ReturnCodes.SUCCESSFUL,
                 ReturnMessage = AppServiceProvider.Instance.Get<IReturnMessages>().Get(ReturnCodes.SUCCESSFUL),
                 Data = data
@@ -21,7 +21,7 @@ namespace YoutubePlay.Models.Base
         {
             return new BaseServiceResult<T>
             {
-                IsSucess = true,
+                IsSuccess = true,
                 ReturnCode = returnCode,
                 ReturnMessage = AppServiceProvider.Instance.Get<IReturnMessages>().Get(returnCode),
                 Data = data
@@ -37,7 +37,7 @@ namespace YoutubePlay.Models.Base
         {
             return new BaseServiceResult<T>
             {
-                IsSucess = false,
+                IsSuccess = false,
                 ReturnCode = e.ErrorCode,
                 ReturnMessage = e.Message,
                 Data = default(T)

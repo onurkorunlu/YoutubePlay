@@ -24,8 +24,38 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Remove="ClientApp\src\app\models\base-result.ts" />
+    <None Remove="ClientApp\src\app\models\baseModel.ts" />
+    <None Remove="ClientApp\src\app\models\channelInfo.ts" />
+    <None Remove="ClientApp\src\app\models\search-video-request.ts" />
+    <None Remove="ClientApp\src\app\models\thumbnails.ts" />
+    <None Remove="ClientApp\src\app\models\yotube-mp3.ts" />
+    <None Remove="ClientApp\src\app\models\youtube-video.ts" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\YoutubePlay.Business\YoutubePlay.Business.csproj" />
     <ProjectReference Include="..\YoutubePlay.Common\YoutubePlay.Common.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="ClientApp\src\app\services\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <TypeScriptCompile Include="ClientApp\src\app\models\channelInfo.ts" />
+    <TypeScriptCompile Include="ClientApp\src\app\models\base-result.ts" />
+    <TypeScriptCompile Include="ClientApp\src\app\models\thumbnails.ts" />
+    <TypeScriptCompile Include="ClientApp\src\app\models\search-video-request.ts">
+      <SubType>Code</SubType>
+    </TypeScriptCompile>
+    <TypeScriptCompile Include="ClientApp\src\app\models\yotube-mp3.ts">
+      <SubType>Code</SubType>
+    </TypeScriptCompile>
+    <TypeScriptCompile Include="ClientApp\src\app\models\youtube-video.ts">
+      <SubType>Code</SubType>
+    </TypeScriptCompile>
+    <TypeScriptCompile Include="ClientApp\src\app\models\baseModel.ts" />
   </ItemGroup>
 
   <Target Name="DebugEnsureNodeEnv" BeforeTargets="Build" Condition=" '$(Configuration)' == 'Debug' And !Exists('$(SpaRoot)node_modules') ">
