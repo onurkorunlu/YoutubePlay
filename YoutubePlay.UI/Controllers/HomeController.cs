@@ -17,5 +17,11 @@ namespace YoutubePlay.UI.Controllers
         {
             return await AppServiceProvider.Instance.Get<IYoutubeService>().SearchVideoAsync(request);
         }
+
+        [HttpGet]
+        public async Task<BaseServiceResult<YoutubeMp3>> GetMp3UrlAsync(string videoId)
+        {
+            return await AppServiceProvider.Instance.Get<IYoutubeService>().GetMp3UrlAsync(videoId);
+        }
     }
 }

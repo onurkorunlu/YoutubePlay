@@ -29,6 +29,7 @@
     <None Remove="ClientApp\src\app\models\channelInfo.ts" />
     <None Remove="ClientApp\src\app\models\search-video-request.ts" />
     <None Remove="ClientApp\src\app\models\thumbnails.ts" />
+    <None Remove="ClientApp\src\app\models\yotube-mp3.ts" />
     <None Remove="ClientApp\src\app\models\youtube-video.ts" />
   </ItemGroup>
 
@@ -46,6 +47,9 @@
     <TypeScriptCompile Include="ClientApp\src\app\models\base-result.ts" />
     <TypeScriptCompile Include="ClientApp\src\app\models\thumbnails.ts" />
     <TypeScriptCompile Include="ClientApp\src\app\models\search-video-request.ts">
+      <SubType>Code</SubType>
+    </TypeScriptCompile>
+    <TypeScriptCompile Include="ClientApp\src\app\models\yotube-mp3.ts">
       <SubType>Code</SubType>
     </TypeScriptCompile>
     <TypeScriptCompile Include="ClientApp\src\app\models\youtube-video.ts">

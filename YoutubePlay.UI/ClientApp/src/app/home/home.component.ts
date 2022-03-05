@@ -20,6 +20,9 @@ export class HomeComponent {
     public isLoading = false;
     public searchVideoRequest: SearchVideoRequest = <SearchVideoRequest>{ maxResult: 20 };
 
+
+    public items =["Item1","Item2","Item3","Item4" ]
+
     constructor(private youtubeService: YoutubeService, private sanitizer: DomSanitizer) {
         this.player = new Plyr('#player', {
             /* options */
@@ -44,18 +47,17 @@ export class HomeComponent {
     }
 
     public play = function (item) {
-
         this.selectedItem = item;
         var index = this.videoList.indexOf(item);
         this.playlist = this.videoList.slice(index)
         console.log(this.videoList);
-        this.youtubeService.getMp3(item.id,
-            function (res) {
+        this.youtubeService.getMp3(item.id).subscribe(
+            (res) => {
                 if (res.isSuccess) {
                     console.log(res.data);
                     this.selectedItem.url = res.data.url;
                     var htmlPlayer = document.getElementById('player');
-                    htmlPlayer.setAttribute("src", this.sanitizer.bypassSecurityTrustHtml(res.data.url));
+                    htmlPlayer.setAttribute("src", res.data.url);
                     this.player = new Plyr('#player', <Options>{
                         title: this.selectedItem.title,
                         autoplay: true,
@@ -64,7 +66,7 @@ export class HomeComponent {
                             title: this.selectedItem.title,
                             sources: [
                                 {
-                                    src: this.sanitizer.bypassSecurityTrustHtml(res.data.url),
+                                    src: res.data.url,
                                     type: 'audio/mp3'
                                 }
                             ]
@@ -73,6 +75,13 @@ export class HomeComponent {
 
                     setTimeout(this.checkState, 3000)
                 }
+                else {
+                    console.log(res);
+                }
+            },
+            (errorMessage: string) => {
+                console.log(errorMessage);
+                this.isLoading = false;
             }
         )
     }

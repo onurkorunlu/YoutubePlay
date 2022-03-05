@@ -1,104 +1,45 @@
 
-<div>
+<form #f="ngForm">
 
-    <form #f="ngForm">
-
-        <div class="form-row">
-            <div class="form-group col-9">
-                <input type="text" [(ngModel)]="searchVideoRequest.query" [ngModelOptions]="{standalone: true}" class="form-control input-lg" id="videoName" placeholder="Video Adý ..." autocomplete="off" />
-            </div>
-            <div class="form-group col-3">
-                <select class="form-control" [(ngModel)]="searchVideoRequest.maxResult" [ngModelOptions]="{standalone: true}">
-                    <option value="5">5</option>
-                    <option value="10">10</option>
-                    <option value="20" selected>20</option>
-                </select>
-            </div>
-            <button type="button" class="btn btn-primary btn-block" (click)="searchVideos()">Ara</button>
+    <div class="form-row">
+        <div class="form-group col-9">
+            <input type="text" [(ngModel)]="searchVideoRequest.query" [ngModelOptions]="{standalone: true}" class="form-control input-lg" id="videoName" placeholder="Video Name ..." autocomplete="off" />
         </div>
-    </form>
-
-
-    <div *ngIf="videoList.length>0">
-
-        <table mat-table [dataSource]="videoList" class="mat-elevation-z8">
-
-            <!-- Position Column -->
-            <ng-container matColumnDef="image">
-                <th mat-header-cell *matHeaderCellDef> Img </th>
-                <td mat-cell *matCellDef="let item">
-                    <img style="max-height:60px" src="{{item.thumbnails.url}}" />
-                </td>
-            </ng-container>
-
-            <!-- Name Column -->
-            <ng-container matColumnDef="title">
-                <th mat-header-cell *matHeaderCellDef> Title </th>
-                <td mat-cell *matCellDef="let item">
-                    {{item.title}}
-                </td>
-            </ng-container>
-
-            <!-- Symbol Column -->
-            <ng-container matColumnDef="actions">
-                <th mat-header-cell *matHeaderCellDef> Actions </th>
-                <td mat-cell *matCellDef="let item">
-                    <button mat-icon-button aria-label="Example icon button with a vertical three dot icon" (ngclick)="play(item)">
-                        <mat-icon>play_circle_filled</mat-icon>
-                    </button>
-                </td>
-            </ng-container>
-
-            <tr mat-row *matRowDef="let row; columns: ['image','title','actions'];"></tr>
-        </table>
-
-
-        <table class="table table-borderless">
-            <tbody>
-                <tr *ngFor="let item of videoList;">
-                    <td style="vertical-align:middle;width:10%">
-                    </td>
-                    <td class="text-wrap" style="vertical-align: middle; width: 80% ">{{item.title}}</td>
-                    <td style="vertical-align: middle; width: 10%">
-                        <button mat-icon-button aria-label="Example icon button with a vertical three dot icon" (ngclick)="play(item)">
-                            <mat-icon>play_circle_filled</mat-icon>
-                        </button>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
+        <div class="form-group col-3">
+            <select class="form-control" [(ngModel)]="searchVideoRequest.maxResult" [ngModelOptions]="{standalone: true}">
+                <option value="5">5</option>
+                <option value="10">10</option>
+                <option value="20" selected>20</option>
+            </select>
+        </div>
+        <button type="button" class="btn btn-light btn-block" (click)="searchVideos()">Search</button>
     </div>
+</form>
 
-    <div class="text-center" style="margin-top:50px" *ngIf="isLoading">
-        <div class="spinner-grow text-primary" role="status">
-            <span class="sr-only">Loading...</span>
-        </div>
-        <div class="spinner-grow text-secondary" role="status">
-            <span class="sr-only">Loading...</span>
-        </div>
-        <div class="spinner-grow text-success" role="status">
-            <span class="sr-only">Loading...</span>
-        </div>
-        <div class="spinner-grow text-danger" role="status">
-            <span class="sr-only">Loading...</span>
-        </div>
-        <div class="spinner-grow text-warning" role="status">
-            <span class="sr-only">Loading...</span>
-        </div>
-        <div class="spinner-grow text-info" role="status">
-            <span class="sr-only">Loading...</span>
-        </div>
-        <div class="spinner-grow text-light" role="status">
-            <span class="sr-only">Loading...</span>
-        </div>
-        <div class="spinner-grow text-dark" role="status">
-            <span class="sr-only">Loading...</span>
-        </div>
-    </div>
+<hr />
 
+<cdk-virtual-scroll-viewport style="height: 500px" itemSize="5">
 
-    <hr />
-    <div class="footer bg-dark">
-        <audio id="player" src="#" controls style="width:100%;padding:5px;" autoplay></audio>
-    </div>
+    <mat-card [ngClass]="'example-card video-card'" *cdkVirtualFor="let item of videoList" [ngStyle]="{'background-image': 'url(' + item.thumbnails.url + ')'}">
+        <mat-card-header>
+            <div mat-card-avatar [ngStyle]="{'background-size': 'cover', 'background-image': 'url(' + item.channel.thumbnails.url + ')'}"></div>
+            <mat-card-title class="video-card-title">{{item.channel.name}}</mat-card-title>
+            <mat-card-subtitle class="video-card-subtitle">{{item.title}}</mat-card-subtitle>
+        </mat-card-header>
+        <mat-card-actions align="end">
+            <button mat-fab color="primary" aria-label="Example icon button with a bookmark icon" (click)="play(item)">
+                <mat-icon>play_circle_filled</mat-icon>
+            </button>
+        </mat-card-actions>
+        <mat-card-footer *ngIf="selectedItem == item">
+            <mat-progress-bar mode="indeterminate"></mat-progress-bar>
+        </mat-card-footer>
+    </mat-card>
+
+</cdk-virtual-scroll-viewport>
+
+<hr />
+
+<div class="footer bg-dark">
+    <audio id="player" src="#" controls style="width:100%;padding:5px;" autoplay></audio>
 </div>

@@ -9,9 +9,15 @@ import { NavMenuComponent } from './nav-menu/nav-menu.component';
 import { HomeComponent } from './home/home.component';
 import { environment } from '../environments/environment';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+
+// Materials
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { MatTableModule } from '@angular/material/table';
+import { MatCardModule } from '@angular/material/card';
+import { ScrollingModule } from '@angular/cdk/scrolling';
+import { MatGridListModule } from '@angular/material/grid-list';
+import { MatProgressBarModule } from '@angular/material/progress-bar';
 
 @NgModule({
     declarations: [
@@ -28,10 +34,14 @@ import { MatTableModule } from '@angular/material/table';
         ]),
         BrowserAnimationsModule,
 
-        // Material
+        // Materials
         MatIconModule,
         MatButtonModule,
-        MatTableModule
+        MatTableModule,
+        MatCardModule,
+        ScrollingModule,
+        MatGridListModule,
+        MatProgressBarModule
     ],
     providers: [
     ],

@@ -1,19 +1,29 @@
 /* You can add global styles to this file, and also import other style files */
 
-/* Provide sufficient contrast against white background */
-a {
-  color: #0366d6;
+html, body {
+    height: 100%;
 }
 
-code {
-  color: #e01a76;
+body {
+    margin: 0;
+    font-family: Roboto, "Helvetica Neue", sans-serif;
 }
 
-.btn-primary {
-  color: #fff;
-  background-color: #1b6ec2;
-  border-color: #1861ac;
+.video-card {
+    margin-bottom: 10px;
+    background-color: #000000d1;
+    background-blend-mode: overlay;
+    background-size: cover;
+    background-repeat: no-repeat;
 }
 
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+.video-card-title {
+    font-size: smaller !important;
+}
+
+.video-card-subtitle {
+    font-size: medium !important;
+}
+
+
+
