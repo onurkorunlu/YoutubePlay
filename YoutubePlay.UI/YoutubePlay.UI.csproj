@@ -36,11 +36,12 @@
 
   <ItemGroup>
     <Folder Include="ClientApp\src\app\services\" />
+    <Folder Include="Properties\PublishProfiles\" />
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.AspNetCore.SpaServices" Version="3.1.22" />
-    <PackageReference Include="Microsoft.AspNetCore.SpaServices.Extensions" Version="3.1.22" />
+    <PackageReference Include="Microsoft.AspNetCore.SpaServices" Version="3.1.0" />
+    <PackageReference Include="Microsoft.AspNetCore.SpaServices.Extensions" Version="3.1.0" />
   </ItemGroup>
 
   <ItemGroup>
